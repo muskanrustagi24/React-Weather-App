@@ -107,11 +107,9 @@ const WeatherComponent = (props) => {
   const [showHourlyForecast, setShowHourlyForecast] = useState(false);
 
   const handleHourlyForecast = () => {
-    setShowHourlyForecast({
-      showHourlyForecast: !showHourlyForecast
-    });
+    setShowHourlyForecast(!showHourlyForecast);
   };
- 
+
   console.log(showHourlyForecast);
 
   const isDay = weather?.current?.weather[0].icon?.includes("d");
@@ -122,7 +120,9 @@ const WeatherComponent = (props) => {
     <>
       <WeatherContainer>
         <Condition>
-          <span>{`${Math.floor(weather?.current?.temp)}°C`}</span>
+          <span>{`${Math.floor(
+            (5 / 9) * (weather?.current?.temp - 32)
+          )}°C`}</span>
           {`  |  ${weather?.current?.weather[0].description}`}
         </Condition>
         <Location>{city}</Location>

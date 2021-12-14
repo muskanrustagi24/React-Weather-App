@@ -21,7 +21,8 @@ class DailyForecastComponent extends React.Component {
             {date}-{month}-{year}
           </p>
           <p className="forecast-item__temp">
-            {f.temp.min} <span className="forecast-item__degree">°</span>
+            {Math.floor((5 / 9) * (f.temp.min - 32))}
+            <span className="forecast-item__degree">°</span>
           </p>
           <img className="forecast-item__img" src={image.url} alt={image.alt} />
           <p className="forecast-item__description">{description}</p>

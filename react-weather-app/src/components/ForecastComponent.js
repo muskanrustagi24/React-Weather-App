@@ -25,7 +25,8 @@ class ForecastComponent extends React.Component {
             {hour} {ampm}
           </p>
           <p className="forecast-item__temp">
-            {f.temp} <span className="forecast-item__degree">°</span>
+            {Math.floor((5 / 9) * (f.temp - 32))}{" "}
+            <span className="forecast-item__degree">°</span>
           </p>
           <img className="forecast-item__img" src={image.url} alt={image.alt} />
           <p className="forecast-item__description">{description}</p>
