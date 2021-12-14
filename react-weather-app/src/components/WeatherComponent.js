@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { WeatherIcons } from "../App";
 import ForecastComponent from "./ForecastComponent";
+import DailyForecastComponent from "./DailyForecastComponent";
+import { useState } from "react";
 
 export const WeatherInfoIcons = {
   sunset: "/icons/temp.svg",
@@ -12,7 +14,7 @@ export const WeatherInfoIcons = {
 
 const WeatherContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   margin: 20px auto;
   flex-direction: row;
   justify-content: space-between;
@@ -30,8 +32,8 @@ const Condition = styled.span`
 `;
 
 const WeatherIcon = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
   margin: 5px auto;
 `;
 
@@ -102,6 +104,16 @@ const WeatherInfoComponent = (props) => {
 
 const WeatherComponent = (props) => {
   const { weather, city } = props;
+  const [showHourlyForecast, setShowHourlyForecast] = useState(false);
+
+  const handleHourlyForecast = () => {
+    setShowHourlyForecast({
+      showHourlyForecast: !showHourlyForecast
+    });
+  };
+ 
+  console.log(showHourlyForecast);
+
   const isDay = weather?.current?.weather[0].icon?.includes("d");
   const getTime = (timeStamp) => {
     return `${new Date(timeStamp * 1000).getHours()}`;
@@ -110,7 +122,7 @@ const WeatherComponent = (props) => {
     <>
       <WeatherContainer>
         <Condition>
-          <span>{`${Math.floor(weather?.current?.temp - 273)}°C`}</span>
+          <span>{`${Math.floor(weather?.current?.temp)}°C`}</span>
           {`  |  ${weather?.current?.weather[0].description}`}
         </Condition>
         <Location>{city}</Location>
@@ -135,9 +147,14 @@ const WeatherComponent = (props) => {
           name={"pressure"}
           value={weather?.current?.pressure}
         />
-        {weather.hourly.length > 0 && (
-          <ForecastComponent forecast={weather.hourly} />
-        )}
+        <button onClick={handleHourlyForecast}>Daily / Hourly Forecast</button>
+        {showHourlyForecast
+          ? weather.hourly.length > 0 && (
+              <ForecastComponent forecast={weather.hourly} />
+            )
+          : weather.daily.length > 0 && (
+              <DailyForecastComponent forecast={weather.daily} />
+            )}
       </WeatherInfoContainer>
     </>
   );

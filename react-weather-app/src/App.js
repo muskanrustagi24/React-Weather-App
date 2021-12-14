@@ -26,7 +26,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 980px;
-  height: 800px;
+  height: 750px;
   padding: 20px 10px;
   margin: auto;
   border-radius: 4px;
@@ -54,14 +54,13 @@ function App() {
       response.coord.lon
     );
 
-    console.log(forecastRes);
     updateWeather(forecastRes);
   };
 
   return (
     <Container>
       <AppLabel>The Weather Channel</AppLabel>
-      {weather ? (
+      {weather && city ? (
         <WeatherComponent weather={weather} city={city}/>
       ) : (
         <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
