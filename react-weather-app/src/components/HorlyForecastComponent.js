@@ -1,8 +1,7 @@
 import React from "react";
 import "./Forecast.scss";
 
-
-class ForecastComponent extends React.Component {
+class HourlyForecastComponent extends React.Component {
   render() {
     const items = this.props.forecast.map((f, i) => {
       const image = {
@@ -43,4 +42,4 @@ class ForecastComponent extends React.Component {
   }
 }
 
-export default ForecastComponent;
+export default HourlyForecastComponent;
