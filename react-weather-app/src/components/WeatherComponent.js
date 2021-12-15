@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { WeatherIcons } from "../App";
-import ForecastComponent from "./HorlyForecastComponent";
+import ForecastComponent from "./HourlyForecastComponent";
 import DailyForecastComponent from "./DailyForecastComponent";
 import { useState } from "react";
 
