@@ -3,6 +3,7 @@ import "./Forecast.scss";
 
 class DailyForecastComponent extends React.Component {
   render() {
+    var k = -1;
     const items = this.props.forecast.map((f, i) => {
       const image = {
         url: `http://openweathermap.org/img/wn/${f.weather[0].icon}@2x.png`,
@@ -14,22 +15,25 @@ class DailyForecastComponent extends React.Component {
       let month = new Date(unixTimestamp * 1000).getMonth() + 1;
       let year = new Date(unixTimestamp * 1000).getFullYear();
       console.log(new Date(unixTimestamp * 1000));
-
-      return (
-        <div key={i} className="forecast-item">
-          <p className="forecast-item__time">
-            {date}-{month}-{year}
-          </p>
-          <p className="forecast-item__temp">
-            {Math.floor((5 / 9) * (f.temp.min - 32))}
-            <span className="forecast-item__degree">°</span>
-          </p>
-          <img className="forecast-item__img" src={image.url} alt={image.alt} />
-          <p className="forecast-item__description">{description}</p>
-        </div>
-      );
+      
+      k++;
+      if(k < 7){
+        return (
+          <div key={i} className="forecast-item">
+            <p className="forecast-item__time">
+              {date}-{month}-{year}
+            </p>
+            <p className="forecast-item__temp">
+              {Math.floor((5 / 9) * (f.temp.min - 32))}
+              <span className="forecast-item__degree">°</span>
+            </p>
+            <img className="forecast-item__img" src={image.url} alt={image.alt} />
+            <p className="forecast-item__description">{description}</p>
+          </div>
+        );
+      }
     });
-
+  
     return (
       <div className="forecast">
         <h3 className="forecast__title">Daily Forecast</h3>
